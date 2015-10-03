@@ -1,0 +1,28 @@
+/* * * * * * * */
+
+
+.img-preview {
+	overflow: hidden;
+	border: 2px solid #64617F;
+	margin-bottom: 10px;
+}
+
+.img-preview-md { /*these need to be dyanimc based on the aspectRatio*/
+	height: 180px;
+	width: 320px;
+}
+
+.img-preview-sm {
+	height: 100px;
+	width: 160px;
+}
+
+.img-preview-xs {
+	height: 36px;
+	width: 64px;
+}
+
+#controls {
+	margin-top: 10px;
+}
+

@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Upload Image</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" >
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/cropper.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-offset-1 col-md-10">
+					<h1>Upload Image</h1>
+					<div class="alert alert-danger alert-dissmissible hidden" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;<span></button>
+						<p></p>
+					</div>
+					<form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" id="upload_1">
+						<div class="form-group col-md-3">
+							<input type="file" name="tmpfile" class="form-control">
+						</div>
+						<input type="submit" value="Upload" class="btn btn-primary">
+					</form>
+				</div>
+			</div>
+			<div class="row hidden" id="image_container">
+				<div class="col-md-10 col-md-offset-1">
+					<h4>Image <small>Select area for thumbnail</small></h4>
+					<div class="img-container">
+						<img id="image">
+					</div>
+				</div>
+			</div>
+			<div class="row hidden" id="controls">
+				<div class="col-md-offset-1 col-md-10">
+					<div class="form-inline" id="ratios">
+						<div class="form-group">
+							<label for="xRatio">X Ratio</label>
+							<input class="form-control" name="xRatio" placeholder="16">
+						</div>
+						<div class="form-group">
+							<label for="yRatio">Y Ratio</label>
+							<input class="form-control" name="yRatio" placeholder="10">	
+						</div>
+						<div class="form-group">
+							<button class="btn btn-primary" name="set_ratio">Set Ratio</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-offset-1 col-md-8">
+					<button class="btn btn-primary" id="set_config">Set Thumb Configuration</button>
+					<button class="btn btn-primary" id="switch">Configure Banner</button>
+					<button class="btn btn-success" id="save">Save &amp; Continue</button>
+				</div>
+			</div>
+				
+			</div>
+			<div class="row hidden" id="preview_container">
+				<div class="col-md-offset-1 col-md-10">
+					<h3>Previews</h3>
+				</div>
+				<div class="col-md-5 col-md-offset-1">
+					<h4>Medium</h4>
+					<div id="primary_preview" class="img-preview img-preview-md">
+					</div>
+				</div>
+				<div class="col-md-2">
+					<h4>Small</h4>
+					<div id="secondary_preview" class="img-preview img-preview-sm">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="{{ url_for('static', filename='js/jquery.blockUI.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/cropper.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/functions.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+	<script>
+		$(document).ready(function() {
+			Upload.init();	
+		});
+	</script>
+</html>

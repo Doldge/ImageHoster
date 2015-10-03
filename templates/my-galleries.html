@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+	<meta charset="utf-8">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>South Island Pics &rarr; southisland.pics</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}">
+	<link rel='stylesheet' href="{{ url_for('static', filename='css/main.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/justifiedGallery.css') }}" >
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.fancybox.css') }}">
+</head>
+<body style="height: 100%">
+	<ul class="sidebar nav nav-pills nav-stacked">
+		<li class="nav-item active"><a href="#">Home</a></li>
+		<li class="nav-item"><a href="#">Galleries</a></li>
+		<li class="divider"></li>
+		<li class="nav-item"><a href="#" data-toggle="modal" data-target="#login-window"->Log In</a></li>
+	</ul>
+	<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+	<label for="nav-trigger">
+		<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'>
+			<rect width='30' height='6'/>
+			<rect y='24' width='30' height='6'/>
+			<rect y='12' width='30' height='6'/>
+		</svg>
+	</label>
+
+	<div class="site-wrapper" style="height: 100%">
+    	<div class='row'>
+            <div class='row'>&nbsp;</div>
+            <div class='row' >
+					<div id="header"><img class='col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-3 col-md-offset-9 col-lg-offset-9 col-lg-3' src="{{ url_for('static', filename='assets/sipics-main-banner-logo-graphic-02.png') }}" style='position:fixed; z-index: 9999'></div>
+            </div>
+    	</div> <!-- START SCREEN CONTAINER END -->
+        
+        
+        <footer id='disclaimer' class='row'><div id='disclaimer_bg' class='col-md-12' style="background-color: rgba( 1, 1, 1, 0 );">&nbsp;<br>&nbsp;</div>All photographs featured on this website remain &copy; copyright material to the named original photographer and must not be used without the consent of the copyright holder.<br><a href='#'>FULL DISCLAIMER</a> | <a href='#'>PRIVACY POLICY</a> | <a href='#'>ABOUT PROJECT / CONTACT US</a></footer>
+	</div> <!-- ENTIRE PAGE CONTAINER END -->
+	</div>
+</body>
+<script src="{{ url_for('static', filename='js/jquery-1.11.2.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.justifiedGallery.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.fancybox.js') }}"></script>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+<script>
+var PHOTOS = function() {
+	var photos = [];
+{% for image in images -%}
+photos.push( { 'src' : "{{ image.src }}", 'width' : {{ image.width }}, 'height' : 320 } );
+{% endfor -%}
+	return {
+		ALL : function() {
+			return photos;
+		}
+	}
+}();
+
+$(document).ready(function() {
+	Index.init();
+
+});
+</script>
+</html>
+

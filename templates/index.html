@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rumblelane.com | Photography</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}">
+	<link rel='stylesheet' href="{{ url_for('static', filename='css/main.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/justifiedGallery.css') }}" >
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.fancybox.css') }}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+	<ul class="sidebar nav nav-pills nav-stacked" >
+		<li class="nav-item"><a href="http://blog.rumblelane.com"><span class="material-icons">format_align_left</span> Blog</a></li>
+		<li class="nav-item"><a href="http://rumblelane.com"><div class="material-icons">home</div> About</a></li>
+		<li class="divider"></li>
+		<li class="nav-item active"><a href="#"><div class="material-icons">landscape</div> Photography</a></li>
+		<li class="nav-item"><a href="http://rumblelane.com/code/"><div class="material-icons">code</div> Code</a></li>
+		<li class="nav-item"><a href="#"><div class="material-icons">airplanemode_active</div> Travel</a></li>
+		<!--<li class="nav-item"><a href="#" data-toggle="modal" data-target="#login-window"->Log In</a></li>-->
+	</ul>
+	<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+	<label for="nav-trigger">
+		<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'>
+			<rect width='30' height='6'/>
+			<rect y='24' width='30' height='6'/>
+			<rect y='12' width='30' height='6'/>
+		</svg>
+	</label>
+
+	<div class="site-wrapper">
+	<div class='container-fluid'>
+		<div class="modal fade" id="login-window" tabindex="-1" role="dialog" aria-labelledby="login-window-label" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Clsoe"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="login-window-label">Log In</h4>
+					</div>
+					<form role="form" class="form-horizontal">
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="username" class="col-md-3">Username/Email</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" id="username" name="username">
+								</div>
+							</div>	
+							<div class="form-group">
+								<label for="password" class="col-md-3">Password</label>
+								<div class="col-md-9">
+									<input type="password" class="form-control" id="password" name="password">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success" id="login">Log In</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+    	<div class='row start-screen-container'>
+            <div class='row'>&nbsp;</div>
+            <div class='row welcome-center'>
+                <div class='col-xs-offset-1 col-xs-10 col-sm-offset-4 col-sm-4 col-md-4 col-md-offset-4 col-lg-offset-4 col-lg-4 text-center home-welcome-container img-rounded'>
+                <h1 class='site-text-sb'>welcome</h1><br>
+                <p>Scroll down to view the photographs<!--<br>or <a href='#' class='btn btn-default btn-xs'>click here</a> to view the full gallery-->.</p>
+                </div>
+            </div>
+            
+            <div class='row'>
+            </div>
+            
+    	</div> <!-- START SCREEN CONTAINER END -->
+        
+        
+        <div class='row home-tile-wall'>
+        	<div class='col-md-12 '>
+			<h1 class='col-md-offset-1 site-text-sb'> Photographs</h1>
+			<div class="col-lg-offset-1 col-lg-10">
+					<div id="gallery">
+						{% for image in images  -%}
+						<a href="{{ image.large_src }}" class="fancybox fancybox.ajax" rel="gallery" title="{{ image.title }}"><img src="{{ image.src }}" alt="&copy; Callum Trayner"></a>
+						{% endfor -%}
+					</div>
+			</div>
+        	</div>
+        </div>
+        <footer id='disclaimer' class='row'><div id='disclaimer_bg' class='col-md-12' style="background-color: rgba( 1, 1, 1, 0 );">&nbsp;<br>&nbsp;</div>All photographs featured on this website remain &copy; copyright material to the named original photographer and must not be used without the consent of the copyright holder.<br><a href='#'>FULL DISCLAIMER</a> | <a href='#'>PRIVACY POLICY</a> | <a href='#'>ABOUT PROJECT / CONTACT US</a></footer>
+	</div> <!-- ENTIRE PAGE CONTAINER END -->
+	</div>
+</body>
+<script src="{{ url_for('static', filename='js/jquery-1.11.2.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.justifiedGallery.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.fancybox.js') }}"></script>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+<script>
+var PHOTOS = function() {
+	var photos = [];
+{% for image in images -%}
+photos.push( { 'src' : "{{ image.src }}", 'width' : {{ image.width }}, 'height' : 320 } );
+{% endfor -%}
+	return {
+		ALL : function() {
+			return photos;
+		}
+	}
+}();
+
+$(document).ready(function() {
+	Index.init();
+
+});
+</script>
+</html>
+
