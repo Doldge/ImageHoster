@@ -35,9 +35,9 @@ def test():
         image['large_src'] = '/image/'+str(row[0])
         image['title'] = '&copy; Callum Trayner 2015'
         images.append(image)
-    images = images + images 
+    images = images + images
     shuffle(images)
-    return render_template('index.html', images = images)
+    return render_template('layout.html', images = images)
 
 
 @app.route('/tmp/image/<imagename>', methods = ['GET', 'POST'])
@@ -241,7 +241,7 @@ def logout():
 
 ## Functions
 def gen_location(location = None):
-    cmd = '''/bin/mkdir -p %s''' 
+    cmd = '''/bin/mkdir -p %s'''
     if location:
         cmd = cmd % (app.config['TEMP_FOLDER']+location)
     else:
